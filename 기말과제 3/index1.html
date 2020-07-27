@@ -1,0 +1,38 @@
+<html>
+<body>
+<h4> Weather Monitor using Firebase, NodeMCU</h4>
+<h4 id="temp"> </h4>
+<h4 id="humi"> </h4>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyD6XxCJM0bQTzh3yBRjWvDjliQr9JEqetE",
+    authDomain: "my-project-bba83-2d951.firebaseapp.com",
+    databaseURL: "https://my-project-bba83-2d951.firebaseio.com",
+    projectId: "my-project-bba83-2d951",
+    storageBucket: "my-project-bba83-2d951.appspot.com",
+    messagingSenderId: "705324546654",
+    appId: "1:705324546654:web:f4a7691ca30dd8677592cf",
+    measurementId: "G-SGHEGG9NZ6"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+<script>
+  var dbRefHumi = firebase.database().ref().child('humidity');
+  var dbRefTemp = firebase.database().ref().child('temperature');
+    dbRefHumi.on("child_added", function(snapshot) {
+  var newHumi = snapshot.val();
+    humi.innerText = "Humidity : " + newHumi + "%";
+  });
+    dbRefTemp.on("child_added", function(snapshot) {
+  var newTemp = snapshot.val();
+    temp.innerText = "Temperature : " + newTemp + "℃";
+  });
+</script>
+</body>
+</html>
